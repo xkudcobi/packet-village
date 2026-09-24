@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packet-village"
+version = "0.1.0"
+description = "A tiny town where your message is cut into envelopes and finds its own way, like packets on the internet."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "xkudcobi" }]
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Education",
+  "Topic :: System :: Networking",
+]
+
+[project.scripts]
+packet-village = "packet_village.cli:main"
+
+[tool.setuptools]
+packages = ["packet_village", "packet_village.ui"]
