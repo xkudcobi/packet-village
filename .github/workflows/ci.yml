@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Byte-compile everything
+        run: python -m compileall -q packet_village tests
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Headless run in both languages
+        run: |
+          python -m packet_village --headless --lang en --seed 1
+          python -m packet_village --headless --lang tr --scenario ring --cut A-B --seed 2
